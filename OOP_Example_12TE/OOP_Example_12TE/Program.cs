@@ -23,7 +23,7 @@ namespace OOP_Example_12TE
                                 + "Tryck B för att skriva ut alla i listan\n"
                                 + "Tryck C för att ändra ett objekt\n"
                                 + "Tryck D för att ta bort ett objekt\n"
-                                + "Tryck E för att söka i listan\n"
+                                + "Tryck E för att söka efter ett objekt\n"
                                 + "Tryck X för att avsluta");
 
                 string val = Console.ReadLine().ToLower(); //Läs in valet användaren gör och spara i variabeln "val".
@@ -66,7 +66,7 @@ namespace OOP_Example_12TE
                         foreach (Person p in myPersons) //Loopar ut alla objekt av klassen Person som finns i listan myPersons. Varje objekt kallas för "p"
                         {
                             Console.WriteLine(andraindex + ":\n" + p + "\n"); //Skriver ut data med hjälp av ToString()-metoden som vi skrivit i klassen Person
-                            andraindex++;
+                            andraindex++; //Öka index med ett så det blir rätt med lista och val.
                         }
 
                         try
@@ -75,18 +75,18 @@ namespace OOP_Example_12TE
                             int andIndex = int.Parse(Console.ReadLine());
 
                             Console.WriteLine("Personnummer?");
-                            myPersons[andIndex].pnr = Console.ReadLine();
+                            myPersons[andIndex].pnr = Console.ReadLine(); //SKriver över värdet för pnr
 
                             Console.WriteLine("Ålder?");
-                            myPersons[andIndex].alder = int.Parse(Console.ReadLine());
+                            myPersons[andIndex].alder = int.Parse(Console.ReadLine()); //Se ovan
 
                             Console.WriteLine("Adress?");
-                            myPersons[andIndex].adress = Console.ReadLine();
+                            myPersons[andIndex].adress = Console.ReadLine(); //Se ovan
 
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine(e.Message);
+                            Console.WriteLine(e.Message); //Om något går fel i runtime så skrivs ett felmeddelande ut.
                         }
                         break;
 
@@ -97,22 +97,25 @@ namespace OOP_Example_12TE
                         foreach (Person p in myPersons) //Loopar ut alla objekt av klassen Person som finns i listan myPersons. Varje objekt kallas för "p"
                         {
                             Console.WriteLine(removeindex + ":\n" + p + "\n"); //Skriver ut data med hjälp av ToString()-metoden som vi skrivit i klassen Person
-                            removeindex++;
+                            removeindex++; //Öka index med ett så det blir rätt med lista och val.
                         }
 
                         try
                         {
                             Console.WriteLine("Vilket index vill du ta bort?");
-                            int remIndex = int.Parse(Console.ReadLine());
+                            int remIndex = int.Parse(Console.ReadLine()); //Valet av index sparas i remIndex
 
 
-                            Person perToRem = myPersons[remIndex];
-                            myPersons.Remove(perToRem);
+                            Person perToRem = myPersons[remIndex]; //Hämta ut vilken person i listan som skall tas bort.
+                                                                   //Baserat på index (remIndex). Sparas i perToRem
+
+                            myPersons.Remove(perToRem); //Tar bort vårt valda objekt från listan.
+
                             Person.counter--; //Fipplar rätt countern
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine(e.Message);
+                            Console.WriteLine(e.Message); //Om något får fel. Ex att indexet inte finns i listan så skrivs felmeddelande ut.
                         }
 
                         break;
