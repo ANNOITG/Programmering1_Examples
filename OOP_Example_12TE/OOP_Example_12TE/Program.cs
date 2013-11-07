@@ -12,12 +12,18 @@ namespace OOP_Example_12TE
         {
 
             List<Person> myPersons = new List<Person>(); //Listan med personer. Denna lista skapas när programmet startar.
+            
+            myPersons.Add(new Person() {pnr = "123456-6787", adress = "Tybblegatan 12", alder = 98});           //Lägger till 2 objekt i listan så vi slipper göra det runtime.
+            myPersons.Add(new Person() { pnr = "126789-0101", adress = "Kärsta 313 Södergård", alder = 34 });   //-----------------------------------------------------------
 
             while (true)
             {
 
                 Console.WriteLine("Tryck A för att lägga till en ny person\n" //Lite alternativ för användaren. Lägg till, Skriv ut och Avsluta
                                 + "Tryck B för att skriva ut alla i listan\n"
+                                + "Tryck C för att ändra ett objekt\n"
+                                + "Tryck D för att ta bort ett objekt\n"
+                                + "Tryck E för att söka i listan\n"
                                 + "Tryck X för att avsluta");
 
                 string val = Console.ReadLine().ToLower(); //Läs in valet användaren gör och spara i variabeln "val".
@@ -53,6 +59,67 @@ namespace OOP_Example_12TE
                         }
                         break;
 
+                    case "c":
+                        Console.WriteLine("Ändra en post via index");
+
+                        int andraindex = 0;
+                        foreach (Person p in myPersons) //Loopar ut alla objekt av klassen Person som finns i listan myPersons. Varje objekt kallas för "p"
+                        {
+                            Console.WriteLine(andraindex + ":\n" + p + "\n"); //Skriver ut data med hjälp av ToString()-metoden som vi skrivit i klassen Person
+                            andraindex++;
+                        }
+
+                        try
+                        {
+                            Console.WriteLine("Vilket index vill du ändra?");
+                            int andIndex = int.Parse(Console.ReadLine());
+
+                            Console.WriteLine("Personnummer?");
+                            myPersons[andIndex].pnr = Console.ReadLine();
+
+                            Console.WriteLine("Ålder?");
+                            myPersons[andIndex].alder = int.Parse(Console.ReadLine());
+
+                            Console.WriteLine("Adress?");
+                            myPersons[andIndex].adress = Console.ReadLine();
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+
+                    case "d":
+                        Console.WriteLine("Ta bort en post via index");
+
+                        int removeindex = 0;
+                        foreach (Person p in myPersons) //Loopar ut alla objekt av klassen Person som finns i listan myPersons. Varje objekt kallas för "p"
+                        {
+                            Console.WriteLine(removeindex + ":\n" + p + "\n"); //Skriver ut data med hjälp av ToString()-metoden som vi skrivit i klassen Person
+                            removeindex++;
+                        }
+
+                        try
+                        {
+                            Console.WriteLine("Vilket index vill du ta bort?");
+                            int remIndex = int.Parse(Console.ReadLine());
+
+
+                            Person perToRem = myPersons[remIndex];
+                            myPersons.Remove(perToRem);
+                            Person.counter--; //Fipplar rätt countern
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+
+                        break;
+
+                    case "e":
+
+                        break;
                     case "x":
                         Environment.Exit(0); //Avsluter programmet med koden 0
                         break;
