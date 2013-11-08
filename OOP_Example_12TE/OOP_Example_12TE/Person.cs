@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_Example_12TE
 {
-    class Person
+    class Person : IComparable
     {
         public static int counter { get; set; }
 
@@ -18,6 +18,23 @@ namespace OOP_Example_12TE
         public string pnr { get; set; }
         public int alder { get; set; }
         public string adress { get; set; }
+
+        public int CompareTo(object person)
+        {
+
+            if (this.pnr == ((Person)person).pnr)
+            {
+                return 0;
+            }
+            else if (this.pnr.CompareTo(((Person)person).pnr) < 1)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
 
         public override string ToString()
         {
