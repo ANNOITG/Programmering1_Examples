@@ -13,8 +13,14 @@ namespace OOP_Example_12TE
 
             List<Person> myPersons = new List<Person>(); //Listan med personer. Denna lista skapas när programmet startar.
             
-            myPersons.Add(new Person() {pnr = "123456-6787", adress = "Tybblegatan 12", alder = 98});           //Lägger till 2 objekt i listan så vi slipper göra det runtime.
-            myPersons.Add(new Person() { pnr = "126789-0101", adress = "Kärsta 313 Södergård", alder = 34 });   //-----------------------------------------------------------
+            myPersons.Add(new Person() { pnr = "123456-6787", adress = "Tybblegatan 12",        alder = 98 });           //Lägger till 2 objekt i listan så vi slipper göra det runtime.
+            myPersons.Add(new Person() { pnr = "126789-0101", adress = "Kärsta 313 Södergård",  alder = 34 });
+            myPersons.Add(new Person() { pnr = "851212-7878", adress = "Kärsta 356 Östergård",  alder = 23 });//-----------------------------------------------------------
+
+
+            //Console.WriteLine("Vilken person baserat på personnummer; vill du ta fram?");
+            //string pnr = Console.ReadLine();
+            //Person person = myPersons.Single(p => p.pnr == pnr);
 
             while (true)
             {
@@ -62,26 +68,26 @@ namespace OOP_Example_12TE
                     case "c":
                         Console.WriteLine("Ändra en post via index");
 
-                        int andraindex = 0;
+                       
                         foreach (Person p in myPersons) //Loopar ut alla objekt av klassen Person som finns i listan myPersons. Varje objekt kallas för "p"
                         {
-                            Console.WriteLine(andraindex + ":\n" + p + "\n"); //Skriver ut data med hjälp av ToString()-metoden som vi skrivit i klassen Person
-                            andraindex++; //Öka index med ett så det blir rätt med lista och val.
+                            Console.WriteLine(p + "\n"); //Skriver ut data med hjälp av ToString()-metoden som vi skrivit i klassen Person
                         }
 
                         try
                         {
-                            Console.WriteLine("Vilket index vill du ändra?");
-                            int andIndex = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Vilken person baserat på personnummer; vill du ta fram?");
+                            string andraPnr = Console.ReadLine();
+                            Person andraPerson = myPersons.Single(p => p.pnr == andraPnr);
 
                             Console.WriteLine("Personnummer?");
-                            myPersons[andIndex].pnr = Console.ReadLine(); //SKriver över värdet för pnr
+                            andraPerson.pnr = Console.ReadLine(); //SKriver över värdet för pnr
 
                             Console.WriteLine("Ålder?");
-                            myPersons[andIndex].alder = int.Parse(Console.ReadLine()); //Se ovan
+                            andraPerson.alder = int.Parse(Console.ReadLine()); //Se ovan
 
                             Console.WriteLine("Adress?");
-                            myPersons[andIndex].adress = Console.ReadLine(); //Se ovan
+                            andraPerson.adress = Console.ReadLine(); //Se ovan
 
                         }
                         catch (Exception e)
@@ -121,6 +127,29 @@ namespace OOP_Example_12TE
                         break;
 
                     case "e":
+                        Console.WriteLine("Skriv in sökord:");
+                        string sokOrd = Console.ReadLine();
+
+                        var sokRes = from p in myPersons
+                                     where p.pnr.Contains(sokOrd)
+                                        || p.alder.ToString().Contains(sokOrd)
+                                        || p.adress.Contains(sokOrd)
+                                     select p;
+
+                        //Förklaringen till hur LINQ-Söningen funkar/tänker
+                        //List<Person> SearchRes = new List<Person>();
+                        //foreach (Person p in myPersons)
+                        //{
+                        //    if (p.pnr.Contains(sokOrd) || p.alder.ToString().Contains(sokOrd) || p.adress.Contains(sokOrd))
+                        //    {
+                        //        SearchRes.Add(p);
+                        //    }
+                        //}
+
+                        foreach (Person p in sokRes)
+                        {
+                            Console.WriteLine(p);
+                        }
 
                         break;
                     case "x":
