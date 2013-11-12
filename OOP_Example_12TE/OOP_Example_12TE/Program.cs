@@ -17,9 +17,11 @@ namespace OOP_Example_12TE
             myPersons.Add(new Person() { pnr = "126789-0101", adress = "Kärsta 313 Södergård",  alder = 34 });
             myPersons.Add(new Person() { pnr = "851212-7878", adress = "Kärsta 356 Östergård",  alder = 23 });//-----------------------------------------------------------
 
+            myPersons.Sort(delegate(Person p1, Person p2) { return p1.pnr.CompareTo(p2.pnr); });
+            
             //myPersons.Sort();
             //myPersons.Sort(delegate(Person p1, Person p2) { return p1.pnr.CompareTo(p2.pnr); });
-            //Console.WriteLine("Vilken person baserat på personnummer; vill du ta fram?");
+            //Console.WriteLine("Vilken person baserat på personnummer; vill du ta fram?"); 
             //string pnr = Console.ReadLine();
             //Person person = myPersons.Single(p => p.pnr == pnr);
 
