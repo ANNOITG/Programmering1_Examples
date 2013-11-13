@@ -16,8 +16,22 @@ namespace OOP_Example_12TE
             myPersons.Add(new Person() { pnr = "623456-6787", adress = "Tybblegatan 12",        alder = 98 });           //Lägger till 2 objekt i listan så vi slipper göra det runtime.
             myPersons.Add(new Person() { pnr = "126789-0101", adress = "Kärsta 313 Södergård",  alder = 34 });
             myPersons.Add(new Person() { pnr = "851212-7878", adress = "Kärsta 356 Östergård",  alder = 23 });//-----------------------------------------------------------
+            Person temp = new Person();
+            for (int sort1 = 0; sort1 < myPersons.Count(); sort1++)
+            {
+                for (int sort = 0; sort < myPersons.Count() - 1; sort++)
+                {
+                    if (myPersons[sort].adress.CompareTo(myPersons[sort + 1].adress) > -1)
+                    {
+                        temp = myPersons[sort + 1];
+                        myPersons[sort + 1] = myPersons[sort];
+                        myPersons[sort] = temp;
+                    }
+                }
+            }
 
-            myPersons.Sort(delegate(Person p1, Person p2) { return p1.pnr.CompareTo(p2.pnr); });
+            foreach (Person i in myPersons)
+                Console.Write("{0} ", i);
             
             //myPersons.Sort();
             //myPersons.Sort(delegate(Person p1, Person p2) { return p1.pnr.CompareTo(p2.pnr); });
